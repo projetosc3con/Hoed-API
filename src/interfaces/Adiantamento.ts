@@ -8,6 +8,7 @@ export default interface Adiantamento {
 export interface ItemAdiantamento {
     alimentacao: number;
     deslocamento: number;
+    outros?: number;
     total: number;
     dataReferencia: string;
 }

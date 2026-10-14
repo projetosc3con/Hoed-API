@@ -120,7 +120,7 @@ export default class Rotinas {
                                         concluída, agora basta inserir a prestação de contas no sistema:</p>
                                         <div class="button-group">
                                             <a
-                                                href="https://viagens-emthos.web.app/viagens/${viagemId}/prestacao"
+                                                href="https://hoed-cda.web.app/viagens/${viagemId}/prestacao"
                                                 class="btn-confirm"
                                             >
                                                 Prestação de contas
@@ -159,7 +159,7 @@ export default class Rotinas {
             }
 
             // VERIFICA PENDENTE FINANCEIRO
-            const pendenteFinanceiro = await db
+            /* const pendenteFinanceiro = await db
                 .collection("VIAGENS")
                 .where("status", "==", "Pendente financeiro")
                 .get();
@@ -303,16 +303,16 @@ export default class Rotinas {
                         },
                     });
                 }
-            }
+            } */
 
             //VERIFICA CONCLUSAO
             const pendenteConclusao = await db
-            .collection("VIAGENS")
-            .where("status", "in", ['Desconto programado', 'Reembolso programado'])
-            .get();
+                .collection("VIAGENS")
+                .where("status", "in", ['Desconto programado', 'Reembolso programado', 'Reembolso pago'])
+                .get();
             for (const viagemDoc of pendenteConclusao.docs) {
                 const viagem = viagemDoc.data() as Viagem;
-                if (this.passouDezDias(viagem.dataVolta)) {
+                if (this.passouDoisDias(viagem.dataVolta)) {
                     await viagemDoc.ref.update({
                         status: "Concluída",
                     });
@@ -331,11 +331,11 @@ export default class Rotinas {
         return new Date(ano, mes - 1, dia);
     }
 
-    static passouDezDias(dataVolta: string): boolean {
+    static passouDoisDias(dataVolta: string): boolean {
         const dataConvertida = this.parseDataBr(dataVolta);
         const hoje = new Date();
         const diffMs = hoje.getTime() - dataConvertida.getTime();
         const diffDias = diffMs / (1000 * 60 * 60 * 24);
-        return diffDias >= 10;
+        return diffDias >= 2;
     }
 }

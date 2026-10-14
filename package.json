@@ -1,8 +1,11 @@
 {
-  "name": "api-viagens-emthos",
+  "name": "api-viagens-hoed",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/functions.js",
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
@@ -26,6 +29,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.3.2",
     "serverless-http": "^4.0.0"
   }
 }

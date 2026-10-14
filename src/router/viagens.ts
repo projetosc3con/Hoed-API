@@ -41,7 +41,7 @@ router.post('/passivosms', async (req, res) => {
       return {
         alimentacao: valorDiaria,
         deslocamento: 0,
-        lavanderia: 0,
+        outros: 0,
         total: valorDiaria,
         dataReferencia: formatDateBR(dataRef),
       };
